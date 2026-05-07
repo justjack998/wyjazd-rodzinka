@@ -325,7 +325,7 @@
   // ============================================================
   //  KONFIGURACJA — wklej tu URL wygenerowany przez Apps Script
   // ============================================================
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxg_TioNaD4ITx2KvXMmLcW0y-_WbdHXNpPWyXWNn1qyC0-ejDfWZfh5mRhIgPvjHu3/exec';
+  const SCRIPT_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQfRYf8zYZnNMjXG0A0iX9cvomomtqVUOTGbS9QQNcZC72DzIc5qhmhXcxc2SP_FZbwd_npwrix98qYyHvJ9FJnFHXGq_Ih626t-tcNqrOdZIaaRjq1ZZIbPZreg2vuJL8YMu63IGoVqBXKLXFAMMPKl_MI4f7gEvMgI7J-OATyREmW8ErQuczgm0KdEklO7a73RxVq-n0rB0VqXRxET4GMFEW4Ee31xCS05wX9UuWJYqXjBwHdvVSmR4CzNT2emiRT9FMAPdBefVY_Rosn0SSLrJ2R_Q&lib=Mz6mNV-GZGFA_IhZLfgdcyj9QrQadjKBx';
   // ============================================================
 
   const PARY = [
@@ -435,7 +435,7 @@
     const para = paraSelect.value;
     if (!para) return;
 
-    if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxg_TioNaD4ITx2KvXMmLcW0y-_WbdHXNpPWyXWNn1qyC0-ejDfWZfh5mRhIgPvjHu3/exec') {
+    if (SCRIPT_URL === 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQfRYf8zYZnNMjXG0A0iX9cvomomtqVUOTGbS9QQNcZC72DzIc5qhmhXcxc2SP_FZbwd_npwrix98qYyHvJ9FJnFHXGq_Ih626t-tcNqrOdZIaaRjq1ZZIbPZreg2vuJL8YMu63IGoVqBXKLXFAMMPKl_MI4f7gEvMgI7J-OATyREmW8ErQuczgm0KdEklO7a73RxVq-n0rB0VqXRxET4GMFEW4Ee31xCS05wX9UuWJYqXjBwHdvVSmR4CzNT2emiRT9FMAPdBefVY_Rosn0SSLrJ2R_Q&lib=Mz6mNV-GZGFA_IhZLfgdcyj9QrQadjKBx') {
       showMsg('⚠️ Najpierw skonfiguruj Apps Script i wklej URL do pliku HTML!', 'error');
       return;
     }
@@ -480,7 +480,7 @@
 
   // ---- Załaduj wyniki ----
   function loadData() {
-    if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxg_TioNaD4ITx2KvXMmLcW0y-_WbdHXNpPWyXWNn1qyC0-ejDfWZfh5mRhIgPvjHu3/exec') {
+    if (SCRIPT_URL === 'https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQfRYf8zYZnNMjXG0A0iX9cvomomtqVUOTGbS9QQNcZC72DzIc5qhmhXcxc2SP_FZbwd_npwrix98qYyHvJ9FJnFHXGq_Ih626t-tcNqrOdZIaaRjq1ZZIbPZreg2vuJL8YMu63IGoVqBXKLXFAMMPKl_MI4f7gEvMgI7J-OATyREmW8ErQuczgm0KdEklO7a73RxVq-n0rB0VqXRxET4GMFEW4Ee31xCS05wX9UuWJYqXjBwHdvVSmR4CzNT2emiRT9FMAPdBefVY_Rosn0SSLrJ2R_Q&lib=Mz6mNV-GZGFA_IhZLfgdcyj9QrQadjKBx') {
       document.getElementById('results').innerHTML = `
         <div class="empty-state">
           <span class="big">🔧</span>
