@@ -4,100 +4,122 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rodzinny wyjazd 2026 ☀️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg:          #faf7f0;
+      --card:        #ffffff;
+      --card-warm:   #f6f0e6;
+      --border:      #e8ddd0;
+      --orange:      #e8703a;
+      --amber:       #f0a030;
+      --dark:        #1e1610;
+      --medium:      #6e6055;
+      --light:       #b8aa9a;
+      --green:       #4caf7d;
+      --red:         #e05252;
+      --shadow:      0 2px 20px rgba(30,22,16,0.07);
+      --radius:      18px;
+      --radius-sm:   12px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #fffbf5;
-      color: #1c1917;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ---- LAYOUT ---- */
+    /* ─── LAYOUT ─────────────────────────────── */
     .wrap {
       max-width: 600px;
       margin: 0 auto;
-      padding: 1.5rem 1rem 4rem;
+      padding: 1.5rem 1rem 5rem;
     }
 
     .card {
-      background: white;
-      border-radius: 16px;
+      background: var(--card);
+      border-radius: var(--radius);
       padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 12px rgba(0,0,0,0.07);
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow);
     }
+    .card-warm { background: var(--card-warm); }
 
     .card-title {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
+      letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
       gap: 0.45rem;
     }
 
-    /* ---- SELECT ---- */
+    /* ─── FORM ───────────────────────────────── */
     .field-label {
-      font-size: 0.82rem;
-      color: #78716c;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.09em;
+      color: var(--light);
       margin-bottom: 0.45rem;
     }
 
     select {
       width: 100%;
-      padding: 0.8rem 2.5rem 0.8rem 1rem;
-      border: 2px solid #e7e5e4;
-      border-radius: 10px;
-      font-size: 1rem;
-      color: #1c1917;
+      padding: 0.85rem 2.5rem 0.85rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: var(--dark);
       background-color: white;
       cursor: pointer;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23b8aa9a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 10px center;
+      background-position: right 12px center;
       transition: border-color 0.15s;
     }
-    select:focus { outline: none; border-color: #f97316; }
+    select:focus { outline: none; border-color: var(--orange); }
 
-    /* ---- NIE JEDZIE ---- */
     .nie-jedzie-wrap { margin-top: 1rem; }
-
     .toggle-row {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       padding: 0.85rem 1rem;
-      border: 2px solid #fecdd3;
-      border-radius: 10px;
-      background: #fff1f2;
+      border: 2px solid #fcccc8;
+      border-radius: var(--radius-sm);
+      background: #fff4f3;
       cursor: pointer;
       user-select: none;
       transition: background 0.15s;
     }
-    .toggle-row:hover { background: #ffe4e6; }
+    .toggle-row:hover { background: #ffe4e0; }
     .toggle-row input[type="checkbox"] {
       width: 20px; height: 20px;
-      accent-color: #e11d48;
+      accent-color: var(--red);
       flex-shrink: 0; cursor: pointer;
     }
-    .toggle-row span { font-size: 0.95rem; color: #be123c; font-weight: 600; }
+    .toggle-row span { font-size: 0.9rem; color: #c04040; font-weight: 600; }
 
-    /* ---- WEEKENDY ---- */
     #weekends-wrap { margin-top: 1.25rem; transition: opacity 0.2s; }
     #weekends-wrap.faded { opacity: 0.3; pointer-events: none; }
 
     .month-heading {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #a8a29e;
+      letter-spacing: 0.09em;
+      color: var(--light);
       margin: 1.1rem 0 0.5rem;
     }
     .month-heading:first-child { margin-top: 0; }
@@ -111,183 +133,242 @@
     .wk-label {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.55rem;
       padding: 0.7rem 0.9rem;
-      border: 2px solid #e7e5e4;
-      border-radius: 10px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       user-select: none;
+      color: var(--dark);
     }
-    .wk-label:has(input:checked) { border-color: #f97316; background: #fff7ed; }
+    .wk-label:has(input:checked) {
+      border-color: var(--orange);
+      background: #fff5f0;
+      color: var(--orange);
+      font-weight: 600;
+    }
     .wk-label input[type="checkbox"] {
       width: 17px; height: 17px;
-      accent-color: #f97316;
+      accent-color: var(--orange);
       flex-shrink: 0; cursor: pointer;
     }
 
-    /* ---- PRZYCISK ---- */
     #submit-btn {
       width: 100%;
       margin-top: 1.25rem;
       padding: 1rem;
-      background: linear-gradient(135deg, #f97316, #fb923c);
+      background: var(--orange);
       color: white;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
+      font-family: inherit;
       border: none;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       transition: opacity 0.15s, transform 0.1s;
       letter-spacing: 0.01em;
     }
-    #submit-btn:hover:not(:disabled) { opacity: 0.92; }
+    #submit-btn:hover:not(:disabled) { opacity: 0.88; }
     #submit-btn:active:not(:disabled) { transform: scale(0.99); }
-    #submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    #submit-btn:disabled { opacity: 0.38; cursor: not-allowed; }
 
-    /* ---- KOMUNIKAT ---- */
     #msg {
       margin-top: 0.75rem;
       padding: 0.75rem 1rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
       text-align: center;
       display: none;
     }
-    #msg.success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
-    #msg.error   { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+    #msg.success { background: #f0fdf6; color: #1a7a4a; border: 1.5px solid #b4f0d0; }
+    #msg.error   { background: #fff4f3; color: #c04040; border: 1.5px solid #fcccc8; }
 
-    /* ---- WYNIKI ---- */
-    .summary-stat {
+    /* ─── TOP DATES CARD ─────────────────────── */
+    .top-empty {
       text-align: center;
-      font-size: 0.9rem;
-      color: #78716c;
-      margin-bottom: 1.1rem;
+      color: var(--light);
+      font-size: 0.88rem;
+      padding: 0.25rem 0 0.5rem;
     }
-    .summary-stat strong { color: #1c1917; }
 
-    .progress-bar {
-      height: 7px;
-      background: #f5f5f4;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 0.3rem 0 0;
-    }
-    .pb-fill {
-      height: 100%;
-      border-radius: 4px;
-      transition: width 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
-    }
-    .pb-green { background: #22c55e; }
-    .pb-amber { background: #f59e0b; }
-    .pb-red   { background: #ef4444; }
-
-    .wk-result { padding: 0.65rem 0; border-bottom: 1px solid #f5f5f4; }
-    .wk-result:last-child { border-bottom: none; }
-
-    .wk-result-row {
+    .top-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
     }
+    .top-row:last-child  { border-bottom: none; padding-bottom: 0; }
+    .top-row:first-child { padding-top: 0; }
 
-    .rank {
-      font-size: 0.68rem;
+    .top-rank {
+      font-size: 1.6rem;
       font-weight: 800;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 30px;
       flex-shrink: 0;
+      line-height: 1;
+      color: var(--border);
+      letter-spacing: -0.03em;
     }
-    .rank-gold   { background: #fef3c7; color: #92400e; }
-    .rank-silver { background: #f1f5f9; color: #475569; }
-    .rank-bronze { background: #fdf2f8; color: #86198f; }
-    .rank-other  { background: #f5f5f4; color: #a8a29e; }
+    .top-rank.r1 { color: var(--amber); }
+    .top-rank.r2 { color: #c0b4a4; }
+    .top-rank.r3 { color: #d8ccc0; }
 
-    .wk-name  { font-size: 0.9rem; font-weight: 500; flex: 1; }
-    .wk-count { font-size: 0.8rem; color: #78716c; flex-shrink: 0; font-weight: 600; }
-    .wk-arrow { font-size: 0.65rem; color: #d4d0ce; transition: transform 0.2s; }
-    .wk-arrow.open { transform: rotate(180deg); }
+    .top-info { flex: 1; min-width: 0; }
 
-    .wk-detail {
+    .top-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.38rem;
+    }
+
+    .top-bar-bg {
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
       overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.28s ease;
     }
-    .wk-detail.open { max-height: 250px; }
-
-    .wk-detail-inner {
-      padding: 0.55rem 0 0.2rem 1.75rem;
-      font-size: 0.8rem;
+    .top-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--orange);
+      transition: width 0.65s cubic-bezier(0.34, 1.2, 0.64, 1);
     }
+    .top-row:nth-child(2) .top-bar-fill { background: var(--amber); }
+    .top-row:nth-child(3) .top-bar-fill { background: #c0b4a4; }
 
-    .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.25rem; }
-
-    .chip {
-      padding: 0.18rem 0.6rem;
+    .top-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--medium);
+      flex-shrink: 0;
+      white-space: nowrap;
+      background: var(--bg);
+      padding: 0.25rem 0.65rem;
       border-radius: 99px;
-      font-size: 0.75rem;
-      font-weight: 600;
     }
-    .chip-yes     { background: #dcfce7; color: #166534; }
-    .chip-no      { background: #fee2e2; color: #991b1b; }
-    .chip-pending { background: #f5f5f4; color: #78716c; }
 
-    .section-micro {
-      font-size: 0.72rem;
+    /* ─── SUMMARY TABLE ─────────────────────── */
+    .res-caption {
+      font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #a8a29e;
-      margin-bottom: 0.25rem;
-    }
-    .section-micro.green  { color: #15803d; }
-    .section-micro.red    { color: #991b1b; }
-
-    .footer-section {
-      margin-top: 1.1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #f5f5f4;
+      letter-spacing: 0.1em;
+      color: var(--light);
     }
 
-    .empty-state {
+    .res-table-wrap {
+      margin-top: 0.75rem;
+      overflow-x: auto;
+    }
+
+    .res-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .rt-head-empty { width: 82px; }
+
+    .rt-head-para {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #a8a29e;
-      font-size: 0.9rem;
+      padding: 0 1px 0.65rem;
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: var(--medium);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .empty-state .big { font-size: 2.5rem; display: block; margin-bottom: 0.6rem; }
+
+    .rt-date {
+      font-size: 0.76rem;
+      color: var(--medium);
+      padding: 0.52rem 0.4rem 0.52rem 0;
+      white-space: nowrap;
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .rt-cell {
+      text-align: center;
+      padding: 0.52rem 1px;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .rt-yes     { color: var(--orange); }
+    .rt-no      { color: #d8cec4; font-weight: 400; font-size: 0.78rem; }
+    .rt-pending { color: #ece6de; font-size: 0.58rem; }
+
+    .res-footer {
+      margin-top: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--light);
+      line-height: 1.75;
+    }
 
     .refresh-btn {
       display: block;
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 1.1rem;
       padding: 0.6rem;
-      background: #fff7ed;
-      color: #c2410c;
-      border: 1.5px solid #fed7aa;
-      border-radius: 8px;
-      font-size: 0.85rem;
+      background: transparent;
+      color: var(--light);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.8rem;
       font-weight: 600;
+      font-family: inherit;
       cursor: pointer;
-      transition: background 0.15s;
+      letter-spacing: 0.01em;
+      transition: background 0.15s, color 0.15s;
     }
-    .refresh-btn:hover { background: #ffedd5; }
+    .refresh-btn:hover { background: #ede5d8; color: var(--medium); }
+
+    /* ─── EMPTY STATE ───────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      color: var(--light);
+      font-size: 0.88rem;
+    }
+    .empty-state .big { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+    /* ─── RESPONSIVE ────────────────────────── */
+    @media (max-width: 480px) {
+      .wrap { padding: 1rem 0.75rem 4rem; }
+      .card { padding: 1.2rem; border-radius: 16px; }
+      .weekend-grid { gap: 0.4rem; }
+      .wk-label { padding: 0.6rem 0.7rem; font-size: 0.83rem; }
+      .rt-head-empty { width: 74px; }
+      .rt-date { font-size: 0.72rem; }
+      .top-rank { font-size: 1.3rem; width: 24px; }
+    }
+
+    @media (min-width: 640px) {
+      .wrap { padding: 2rem 1.5rem 5rem; }
+      .card { padding: 1.75rem; }
+    }
   </style>
 </head>
 <body>
 
 <div class="wrap">
 
-  <!-- ============ FORMULARZ ============ -->
+  <!-- ══ FORMULARZ ══════════════════════════ -->
   <div class="card">
     <div class="card-title">🗓️ Wasza dostępność</div>
 
-    <div class="field-label">Jesteście...</div>
+    <div class="field-label">Jesteście…</div>
     <select id="para-select">
       <option value="">— wybierz się z listy —</option>
     </select>
@@ -299,17 +380,23 @@
       </label>
     </div>
 
-    <div id="weekends-wrap">
-      <!-- wypełnione przez JS -->
-    </div>
+    <div id="weekends-wrap"></div>
 
     <button id="submit-btn" disabled>Zapisz odpowiedź</button>
     <div id="msg"></div>
   </div>
 
-  <!-- ============ WYNIKI ============ -->
+  <!-- ══ TOPOWE TERMINY ══════════════════════ -->
   <div class="card">
-    <div class="card-title">📊 Podsumowanie</div>
+    <div class="card-title">🏆 Topowe terminy</div>
+    <div id="top-dates">
+      <div class="top-empty">Czekamy na pierwsze odpowiedzi…</div>
+    </div>
+  </div>
+
+  <!-- ══ PEŁNA DOSTĘPNOŚĆ ════════════════════ -->
+  <div class="card card-warm">
+    <div class="card-title">📊 Pełna dostępność</div>
     <div id="results">
       <div class="empty-state">
         <span class="big">⏳</span>
@@ -319,14 +406,12 @@
     <button class="refresh-btn" onclick="loadData()">↻ Odśwież wyniki</button>
   </div>
 
-</div><!-- /wrap -->
+</div>
 
 <script>
-  // ============================================================
-  //  KONFIGURACJA — wklej tu URL wygenerowany przez Apps Script
-  // ============================================================
+  // ── KONFIGURACJA ──────────────────────────────────────────────
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyH4ZhM1QjzFSakeIEElQ6dj-quld3_p1mrRUgaPMyPRVxRdqnPe4UY_7YPanGVOaVj/exec';
-  // ============================================================
+  // ─────────────────────────────────────────────────────────────
 
   const PARY = [
     'Agnieszka i Paweł',
@@ -357,7 +442,7 @@
 
   let allResponses = [];
 
-  // ---- Wypełnij select ----
+  // ── BUILD FORM ───────────────────────────────────────────────
   const paraSelect = document.getElementById('para-select');
   PARY.forEach(p => {
     const o = document.createElement('option');
@@ -365,11 +450,8 @@
     paraSelect.appendChild(o);
   });
 
-  // ---- Zbuduj checkboxy weekendów ----
   const weekendsWrap = document.getElementById('weekends-wrap');
-  const months = [...new Set(WEEKENDY.map(w => w.month))];
-
-  months.forEach(month => {
+  [...new Set(WEEKENDY.map(w => w.month))].forEach(month => {
     const h = document.createElement('div');
     h.className = 'month-heading';
     h.textContent = month;
@@ -377,18 +459,16 @@
 
     const grid = document.createElement('div');
     grid.className = 'weekend-grid';
-
     WEEKENDY.filter(w => w.month === month).forEach(w => {
       const lbl = document.createElement('label');
       lbl.className = 'wk-label';
       lbl.innerHTML = `<input type="checkbox" id="${w.id}"><span>${w.label}</span>`;
       grid.appendChild(lbl);
     });
-
     weekendsWrap.appendChild(grid);
   });
 
-  // ---- Zdarzenia ----
+  // ── EVENTS ───────────────────────────────────────────────────
   paraSelect.addEventListener('change', () => {
     const val = paraSelect.value;
     document.getElementById('submit-btn').disabled = !val;
@@ -405,7 +485,7 @@
 
   document.getElementById('submit-btn').addEventListener('click', submitForm);
 
-  // ---- Wstępne wypełnienie formularza ----
+  // ── PREFILL ──────────────────────────────────────────────────
   function prefillForm(para) {
     const r = allResponses.find(x => x.para === para);
     const nieJedzie = document.getElementById('nie-jedzie');
@@ -420,25 +500,18 @@
 
     nieJedzie.checked = (r.nieJada === 'TAK');
     nieJedzie.dispatchEvent(new Event('change'));
-
     if (r.nieJada !== 'TAK') {
       WEEKENDY.forEach(w => {
         document.getElementById(w.id).checked = (r[w.label] === 'TAK');
       });
     }
-
     document.getElementById('submit-btn').textContent = 'Zaktualizuj odpowiedź';
   }
 
-  // ---- Wyślij formularz ----
+  // ── SUBMIT ───────────────────────────────────────────────────
   function submitForm() {
     const para = paraSelect.value;
     if (!para) return;
-
-    if (SCRIPT_URL === 'WSTAW_TUTAJ_URL_APPS_SCRIPT') {
-      showMsg('⚠️ Najpierw skonfiguruj Apps Script i wklej URL do pliku HTML!', 'error');
-      return;
-    }
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
@@ -449,7 +522,6 @@
       para,
       nieJada: document.getElementById('nie-jedzie').checked ? '1' : '0',
     });
-
     WEEKENDY.forEach(w => {
       params.append(w.id, document.getElementById(w.id).checked ? '1' : '0');
     });
@@ -460,7 +532,8 @@
         showMsg('✅ Zapisano! Dziękujemy za odpowiedź.', 'success');
         btn.disabled = false;
         btn.textContent = 'Zaktualizuj odpowiedź';
-        return loadData();
+        // Krótkie opóźnienie — daj Apps Script czas na commit, potem odśwież
+        setTimeout(() => loadData(), 900);
       })
       .catch(() => {
         showMsg('❌ Ups, coś poszło nie tak. Spróbuj ponownie.', 'error');
@@ -478,22 +551,14 @@
     el._t = setTimeout(() => { el.style.display = 'none'; }, 7000);
   }
 
-  // ---- Załaduj wyniki ----
+  // ── LOAD ─────────────────────────────────────────────────────
   function loadData() {
-    if (SCRIPT_URL === 'WSTAW_TUTAJ_URL_APPS_SCRIPT') {
-      document.getElementById('results').innerHTML = `
-        <div class="empty-state">
-          <span class="big">🔧</span>
-          <div>Brak połączenia z bazą danych.</div>
-          <div style="margin-top:0.3rem;font-size:0.8rem">Skonfiguruj Apps Script i wklej URL do pliku HTML.</div>
-        </div>`;
-      return Promise.resolve();
-    }
-
-    return fetch(SCRIPT_URL)
+    // Cache-buster: wymusza świeże dane zamiast cachedowanej odpowiedzi
+    return fetch(SCRIPT_URL + '?_t=' + Date.now())
       .then(r => r.json())
       .then(data => {
         allResponses = Array.isArray(data) ? data : [];
+        renderTopDates();
         renderResults();
         const para = paraSelect.value;
         if (para) prefillForm(para);
@@ -508,106 +573,98 @@
       });
   }
 
-  // ---- Renderuj wyniki ----
-  function renderResults() {
-    const container = document.getElementById('results');
-
-    const going       = allResponses.filter(r => r.nieJada !== 'TAK');
-    const notGoing    = allResponses.filter(r => r.nieJada === 'TAK');
-    const responded   = allResponses.map(r => r.para);
-    const notResponded = PARY.filter(p => !responded.includes(p));
+  // ── RENDER: TOP DATES ────────────────────────────────────────
+  function renderTopDates() {
+    const el    = document.getElementById('top-dates');
+    const going = allResponses.filter(r => r.nieJada !== 'TAK');
     const total = going.length;
 
-    if (allResponses.length === 0) {
-      container.innerHTML = `
+    if (total === 0) {
+      el.innerHTML = `<div class="top-empty">Czekamy na pierwsze odpowiedzi…</div>`;
+      return;
+    }
+
+    const top3 = WEEKENDY
+      .map(w => ({ ...w, count: going.filter(r => r[w.label] === 'TAK').length }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 3)
+      .filter(w => w.count > 0);
+
+    if (!top3.length) {
+      el.innerHTML = `<div class="top-empty">Nikt jeszcze nie zaznaczył żadnego terminu.</div>`;
+      return;
+    }
+
+    el.innerHTML = top3.map((w, i) => `
+      <div class="top-row">
+        <div class="top-rank r${i + 1}">${i + 1}</div>
+        <div class="top-info">
+          <div class="top-label">${w.label}</div>
+          <div class="top-bar-bg">
+            <div class="top-bar-fill" style="width:0%" data-w="${Math.round(w.count / total * 100)}%"></div>
+          </div>
+        </div>
+        <div class="top-count">${w.count}/${total} par</div>
+      </div>`).join('');
+
+    requestAnimationFrame(() => {
+      el.querySelectorAll('.top-bar-fill[data-w]').forEach(b => { b.style.width = b.dataset.w; });
+    });
+  }
+
+  // ── RENDER: FULL TABLE ───────────────────────────────────────
+  function renderResults() {
+    const el       = document.getElementById('results');
+    const going    = allResponses.filter(r => r.nieJada !== 'TAK');
+    const notGoing = allResponses.filter(r => r.nieJada === 'TAK');
+    const notResp  = PARY.filter(p => !allResponses.find(r => r.para === p));
+
+    if (!allResponses.length) {
+      el.innerHTML = `
         <div class="empty-state">
           <span class="big">👋</span>
           <div>Jeszcze nikt nie odpowiedział.</div>
-          <div style="margin-top:0.3rem;font-size:0.8rem">Bądź pierwszy!</div>
         </div>`;
       return;
     }
 
-    // Statystyki per weekend
-    const stats = WEEKENDY.map(w => {
-      const available   = going.filter(r => r[w.label] === 'TAK').map(r => r.para);
-      const unavailable = going.filter(r => r[w.label] !== 'TAK').map(r => r.para);
-      return { ...w, available, unavailable, count: available.length };
-    }).sort((a, b) => b.count - a.count);
+    const short = p => p === 'Mateusz +1' ? 'M+1' : p.split(' i ')[0].slice(0, 4);
 
-    let html = `<div class="summary-stat">
-      <strong>${allResponses.length} z ${PARY.length}</strong> par odpowiedziało`;
-    if (notGoing.length > 0)
-      html += ` &nbsp;·&nbsp; <span style="color:#e11d48">${notGoing.length} nie jedzie</span>`;
-    html += `</div>`;
-
-    stats.forEach((w, i) => {
-      const pct = total > 0 ? Math.round((w.count / total) * 100) : 0;
-      const colorClass = pct >= 70 ? 'pb-green' : pct >= 40 ? 'pb-amber' : 'pb-red';
-      const rankClass  = i === 0 ? 'rank-gold' : i === 1 ? 'rank-silver' : i === 2 ? 'rank-bronze' : 'rank-other';
-
-      html += `
-        <div class="wk-result">
-          <div class="wk-result-row" onclick="toggleDetail('d${w.id}', this)">
-            <span class="rank ${rankClass}">${i + 1}</span>
-            <span class="wk-name">${w.label}</span>
-            <span class="wk-count">${w.count}/${total} par</span>
-            <span class="wk-arrow" id="arr-${w.id}">▾</span>
-          </div>
-          <div class="progress-bar">
-            <div class="pb-fill ${colorClass}" style="width:0%" data-width="${pct}%"></div>
-          </div>
-          <div class="wk-detail" id="d${w.id}">
-            <div class="wk-detail-inner">
-              ${w.available.length ? `
-                <div class="section-micro green">✓ Mogą jechać</div>
-                <div class="chips">${w.available.map(p => `<span class="chip chip-yes">${p}</span>`).join('')}</div>
-              ` : ''}
-              ${w.unavailable.length ? `
-                <div class="section-micro red" style="margin-top:0.45rem">✗ Nie mogą</div>
-                <div class="chips">${w.unavailable.map(p => `<span class="chip chip-no">${p}</span>`).join('')}</div>
-              ` : ''}
-              ${notResponded.length ? `
-                <div class="section-micro" style="margin-top:0.45rem">? Brak odpowiedzi</div>
-                <div class="chips">${notResponded.map(p => `<span class="chip chip-pending">${p}</span>`).join('')}</div>
-              ` : ''}
-            </div>
-          </div>
-        </div>`;
-    });
-
-    if (notGoing.length > 0) {
-      html += `<div class="footer-section">
-        <div class="section-micro red">😢 Nie jadą w tym roku</div>
-        <div class="chips">${notGoing.map(r => `<span class="chip chip-no">${r.para}</span>`).join('')}</div>
-      </div>`;
-    }
-
-    if (notResponded.length > 0) {
-      html += `<div class="footer-section">
-        <div class="section-micro">⏳ Czekamy jeszcze na</div>
-        <div class="chips">${notResponded.map(p => `<span class="chip chip-pending">${p}</span>`).join('')}</div>
-      </div>`;
-    }
-
-    container.innerHTML = html;
-
-    // Animacja pasków po wyrenderowaniu
-    requestAnimationFrame(() => {
-      container.querySelectorAll('.pb-fill[data-width]').forEach(el => {
-        el.style.width = el.dataset.width;
-      });
-    });
+    el.innerHTML = `
+      <div class="res-caption" style="margin-bottom:.75rem">
+        ${allResponses.length} z ${PARY.length} par odpowiedziało
+      </div>
+      <div class="res-table-wrap">
+        <table class="res-table">
+          <thead>
+            <tr>
+              <th class="rt-head-empty"></th>
+              ${PARY.map(p => `<th class="rt-head-para" title="${p}">${short(p)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${WEEKENDY.map(w => `
+              <tr>
+                <td class="rt-date">${w.label}</td>
+                ${PARY.map(p => {
+                  const r = allResponses.find(x => x.para === p);
+                  if (!r)              return `<td class="rt-cell rt-pending">·</td>`;
+                  if (r.nieJada==='TAK') return `<td class="rt-cell rt-no">–</td>`;
+                  return r[w.label]==='TAK'
+                    ? `<td class="rt-cell rt-yes">✓</td>`
+                    : `<td class="rt-cell rt-no">–</td>`;
+                }).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      ${[
+        notResp.length  ? `⏳ Czekamy na: ${notResp.map(short).join(', ')}` : '',
+        notGoing.length ? `😢 Nie jadą: ${notGoing.map(r => short(r.para)).join(', ')}` : '',
+      ].filter(Boolean).map(t => `<div class="res-footer">${t}</div>`).join('')}`;
   }
 
-  function toggleDetail(id, row) {
-    const detail = document.getElementById(id);
-    const arrow  = document.getElementById('arr-' + id.slice(1));
-    detail.classList.toggle('open');
-    if (arrow) arrow.classList.toggle('open');
-  }
-
-  // ---- Start ----
+  // ── INIT ─────────────────────────────────────────────────────
   loadData();
 </script>
 </body>
