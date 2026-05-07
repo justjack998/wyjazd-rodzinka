@@ -395,7 +395,7 @@
     <div class="nie-jedzie-wrap">
       <label class="toggle-row">
         <input type="checkbox" id="nie-jedzie">
-        <span>Nie jedziemy</span>
+        <span>Nie jedziemy w tym roku 😢</span>
       </label>
     </div>
 
@@ -439,7 +439,7 @@
     'Kasia i Mateusz',
     'Milena i Marcin',
     'Paula i Mateusz',
-    'Mateusz +1',
+    'Mateusz i Vanessa',
     'Sylwia i Sławek',
   ];
 
@@ -620,10 +620,10 @@
         <div class="top-info">
           <div class="top-label">${w.label}</div>
           <div class="top-bar-bg">
-            <div class="top-bar-fill" style="width:0%" data-w="${Math.round(w.count / total * 100)}%"></div>
+            <div class="top-bar-fill" style="width:0%" data-w="${Math.round(w.count / PARY.length * 100)}%"></div>
           </div>
         </div>
-        <div class="top-count">${w.count}/${total} par</div>
+        <div class="top-count">${w.count}/${PARY.length} par</div>
       </div>`).join('');
 
     requestAnimationFrame(() => {
@@ -648,8 +648,8 @@
     }
 
     const thHtml = p => {
-      if (p === 'Mateusz +1')
-        return `<span class="th-line1 th-m">Mateusz</span><span class="th-line2 th-neutral">+1</span>`;
+      if (p === 'Mateusz i Vanessa')
+        return `<span class="th-line1 th-m">Mateusz</span><span class="th-line2 th-f">i Vanessa</span>`;
       const [p1, p2] = p.split(' i ');
       return `<span class="th-line1 th-f">${p1}</span><span class="th-line2 th-m">i ${p2}</span>`;
     };
@@ -683,8 +683,8 @@
         </table>
       </div>
       ${[
-        notResp.length  ? `⏳ Czekamy na: ${notResp.map(p => p.split(' i ')[0]).join(', ')}` : '',
-        notGoing.length ? `😢 Nie jadą: ${notGoing.map(r => r.para.split(' i ')[0]).join(', ')}` : '',
+        notResp.length  ? `⏳ Czekamy na: ${notResp.join(', ')}` : '',
+        notGoing.length ? `😢 Nie jadą: ${notGoing.map(r => r.para).join(', ')}` : '',
       ].filter(Boolean).map(t => `<div class="res-footer">${t}</div>`).join('')}`;
   }
 
