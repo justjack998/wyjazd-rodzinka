@@ -288,22 +288,19 @@
       white-space: nowrap;
     }
 
-    .th-line1 {
+    .th-line1,
+    .th-line2 {
       display: block;
       font-size: 0.6rem;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.4;
+      font-weight: 600;
+      line-height: 1.45;
       letter-spacing: 0.01em;
     }
 
-    .th-line2 {
-      display: block;
-      font-size: 0.58rem;
-      font-weight: 500;
-      color: var(--light);
-      line-height: 1.4;
-    }
+    /* stonowane kolory: kobiety = ciepły rosewood, mężczyźni = chłodny slate */
+    .th-f       { color: #b87868; }
+    .th-m       { color: #6e8898; }
+    .th-neutral { color: var(--light); }
 
     .rt-date {
       font-size: 0.76rem;
@@ -398,7 +395,7 @@
     <div class="nie-jedzie-wrap">
       <label class="toggle-row">
         <input type="checkbox" id="nie-jedzie">
-        <span>Nie jedziemy</span>
+        <span>Nie jedziemy w tym roku 😢</span>
       </label>
     </div>
 
@@ -651,9 +648,10 @@
     }
 
     const thHtml = p => {
-      if (p === 'Mateusz +1') return `<span class="th-line1">Mateusz</span><span class="th-line2">+1</span>`;
+      if (p === 'Mateusz +1')
+        return `<span class="th-line1 th-m">Mateusz</span><span class="th-line2 th-neutral">+1</span>`;
       const [p1, p2] = p.split(' i ');
-      return `<span class="th-line1">${p1}</span><span class="th-line2">i ${p2}</span>`;
+      return `<span class="th-line1 th-f">${p1}</span><span class="th-line2 th-m">i ${p2}</span>`;
     };
 
     el.innerHTML = `
