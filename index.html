@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodzinny wyjazd 2026 ☀️</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fffbf5;
+      color: #1c1917;
+      min-height: 100vh;
+    }
+
+    /* ---- LAYOUT ---- */
+    .wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 12px rgba(0,0,0,0.07);
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    /* ---- SELECT ---- */
+    .field-label {
+      font-size: 0.82rem;
+      color: #78716c;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.45rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.8rem 2.5rem 0.8rem 1rem;
+      border: 2px solid #e7e5e4;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #1c1917;
+      background-color: white;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color 0.15s;
+    }
+    select:focus { outline: none; border-color: #f97316; }
+
+    /* ---- NIE JEDZIE ---- */
+    .nie-jedzie-wrap { margin-top: 1rem; }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border: 2px solid #fecdd3;
+      border-radius: 10px;
+      background: #fff1f2;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .toggle-row:hover { background: #ffe4e6; }
+    .toggle-row input[type="checkbox"] {
+      width: 20px; height: 20px;
+      accent-color: #e11d48;
+      flex-shrink: 0; cursor: pointer;
+    }
+    .toggle-row span { font-size: 0.95rem; color: #be123c; font-weight: 600; }
+
+    /* ---- WEEKENDY ---- */
+    #weekends-wrap { margin-top: 1.25rem; transition: opacity 0.2s; }
+    #weekends-wrap.faded { opacity: 0.3; pointer-events: none; }
+
+    .month-heading {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #a8a29e;
+      margin: 1.1rem 0 0.5rem;
+    }
+    .month-heading:first-child { margin-top: 0; }
+
+    .weekend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .wk-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 0.9rem;
+      border: 2px solid #e7e5e4;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+    .wk-label:has(input:checked) { border-color: #f97316; background: #fff7ed; }
+    .wk-label input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: #f97316;
+      flex-shrink: 0; cursor: pointer;
+    }
+
+    /* ---- PRZYCISK ---- */
+    #submit-btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    #submit-btn:hover:not(:disabled) { opacity: 0.92; }
+    #submit-btn:active:not(:disabled) { transform: scale(0.99); }
+    #submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ---- KOMUNIKAT ---- */
+    #msg {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+    }
+    #msg.success { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    #msg.error   { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+
+    /* ---- WYNIKI ---- */
+    .summary-stat {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #78716c;
+      margin-bottom: 1.1rem;
+    }
+    .summary-stat strong { color: #1c1917; }
+
+    .progress-bar {
+      height: 7px;
+      background: #f5f5f4;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.3rem 0 0;
+    }
+    .pb-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .pb-green { background: #22c55e; }
+    .pb-amber { background: #f59e0b; }
+    .pb-red   { background: #ef4444; }
+
+    .wk-result { padding: 0.65rem 0; border-bottom: 1px solid #f5f5f4; }
+    .wk-result:last-child { border-bottom: none; }
+
+    .wk-result-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .rank {
+      font-size: 0.68rem;
+      font-weight: 800;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .rank-gold   { background: #fef3c7; color: #92400e; }
+    .rank-silver { background: #f1f5f9; color: #475569; }
+    .rank-bronze { background: #fdf2f8; color: #86198f; }
+    .rank-other  { background: #f5f5f4; color: #a8a29e; }
+
+    .wk-name  { font-size: 0.9rem; font-weight: 500; flex: 1; }
+    .wk-count { font-size: 0.8rem; color: #78716c; flex-shrink: 0; font-weight: 600; }
+    .wk-arrow { font-size: 0.65rem; color: #d4d0ce; transition: transform 0.2s; }
+    .wk-arrow.open { transform: rotate(180deg); }
+
+    .wk-detail {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.28s ease;
+    }
+    .wk-detail.open { max-height: 250px; }
+
+    .wk-detail-inner {
+      padding: 0.55rem 0 0.2rem 1.75rem;
+      font-size: 0.8rem;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.25rem; }
+
+    .chip {
+      padding: 0.18rem 0.6rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .chip-yes     { background: #dcfce7; color: #166534; }
+    .chip-no      { background: #fee2e2; color: #991b1b; }
+    .chip-pending { background: #f5f5f4; color: #78716c; }
+
+    .section-micro {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #a8a29e;
+      margin-bottom: 0.25rem;
+    }
+    .section-micro.green  { color: #15803d; }
+    .section-micro.red    { color: #991b1b; }
+
+    .footer-section {
+      margin-top: 1.1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f5f5f4;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #a8a29e;
+      font-size: 0.9rem;
+    }
+    .empty-state .big { font-size: 2.5rem; display: block; margin-bottom: 0.6rem; }
+
+    .refresh-btn {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.6rem;
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1.5px solid #fed7aa;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .refresh-btn:hover { background: #ffedd5; }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============ FORMULARZ ============ -->
+  <div class="card">
+    <div class="card-title">🗓️ Wasza dostępność</div>
+
+    <div class="field-label">Jesteście...</div>
+    <select id="para-select">
+      <option value="">— wybierz się z listy —</option>
+    </select>
+
+    <div class="nie-jedzie-wrap">
+      <label class="toggle-row">
+        <input type="checkbox" id="nie-jedzie">
+        <span>Nie jedziemy w tym roku 😢</span>
+      </label>
+    </div>
+
+    <div id="weekends-wrap">
+      <!-- wypełnione przez JS -->
+    </div>
+
+    <button id="submit-btn" disabled>Zapisz odpowiedź</button>
+    <div id="msg"></div>
+  </div>
+
+  <!-- ============ WYNIKI ============ -->
+  <div class="card">
+    <div class="card-title">📊 Podsumowanie</div>
+    <div id="results">
+      <div class="empty-state">
+        <span class="big">⏳</span>
+        Ładowanie wyników…
+      </div>
+    </div>
+    <button class="refresh-btn" onclick="loadData()">↻ Odśwież wyniki</button>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+  // ============================================================
+  //  KONFIGURACJA — wklej tu URL wygenerowany przez Apps Script
+  // ============================================================
+  const SCRIPT_URL = 'WSTAW_TUTAJ_URL_APPS_SCRIPT';
+  // ============================================================
+
+  const PARY = [
+    'Agnieszka i Paweł',
+    'Ania i Rafał',
+    'Beata i Jacek',
+    'Kasia i Mateusz',
+    'Milena i Marcin',
+    'Paula i Mateusz',
+    'Mateusz +1',
+    'Sylwia i Sławek',
+  ];
+
+  const WEEKENDY = [
+    { id: 'w01', label: '6-7 czerwca',    month: 'Czerwiec' },
+    { id: 'w02', label: '13-14 czerwca',  month: 'Czerwiec' },
+    { id: 'w03', label: '20-21 czerwca',  month: 'Czerwiec' },
+    { id: 'w04', label: '27-28 czerwca',  month: 'Czerwiec' },
+    { id: 'w05', label: '4-5 lipca',      month: 'Lipiec'   },
+    { id: 'w06', label: '11-12 lipca',    month: 'Lipiec'   },
+    { id: 'w07', label: '18-19 lipca',    month: 'Lipiec'   },
+    { id: 'w08', label: '25-26 lipca',    month: 'Lipiec'   },
+    { id: 'w09', label: '1-2 sierpnia',   month: 'Sierpień' },
+    { id: 'w10', label: '8-9 sierpnia',   month: 'Sierpień' },
+    { id: 'w11', label: '15-16 sierpnia', month: 'Sierpień' },
+    { id: 'w12', label: '22-23 sierpnia', month: 'Sierpień' },
+    { id: 'w13', label: '29-30 sierpnia', month: 'Sierpień' },
+  ];
+
+  let allResponses = [];
+
+  // ---- Wypełnij select ----
+  const paraSelect = document.getElementById('para-select');
+  PARY.forEach(p => {
+    const o = document.createElement('option');
+    o.value = o.textContent = p;
+    paraSelect.appendChild(o);
+  });
+
+  // ---- Zbuduj checkboxy weekendów ----
+  const weekendsWrap = document.getElementById('weekends-wrap');
+  const months = [...new Set(WEEKENDY.map(w => w.month))];
+
+  months.forEach(month => {
+    const h = document.createElement('div');
+    h.className = 'month-heading';
+    h.textContent = month;
+    weekendsWrap.appendChild(h);
+
+    const grid = document.createElement('div');
+    grid.className = 'weekend-grid';
+
+    WEEKENDY.filter(w => w.month === month).forEach(w => {
+      const lbl = document.createElement('label');
+      lbl.className = 'wk-label';
+      lbl.innerHTML = `<input type="checkbox" id="${w.id}"><span>${w.label}</span>`;
+      grid.appendChild(lbl);
+    });
+
+    weekendsWrap.appendChild(grid);
+  });
+
+  // ---- Zdarzenia ----
+  paraSelect.addEventListener('change', () => {
+    const val = paraSelect.value;
+    document.getElementById('submit-btn').disabled = !val;
+    if (val) prefillForm(val);
+  });
+
+  document.getElementById('nie-jedzie').addEventListener('change', function () {
+    weekendsWrap.classList.toggle('faded', this.checked);
+    weekendsWrap.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.disabled = this.checked;
+      if (this.checked) cb.checked = false;
+    });
+  });
+
+  document.getElementById('submit-btn').addEventListener('click', submitForm);
+
+  // ---- Wstępne wypełnienie formularza ----
+  function prefillForm(para) {
+    const r = allResponses.find(x => x.para === para);
+    const nieJedzie = document.getElementById('nie-jedzie');
+
+    if (!r) {
+      nieJedzie.checked = false;
+      nieJedzie.dispatchEvent(new Event('change'));
+      WEEKENDY.forEach(w => { document.getElementById(w.id).checked = false; });
+      document.getElementById('submit-btn').textContent = 'Zapisz odpowiedź';
+      return;
+    }
+
+    nieJedzie.checked = (r.nieJada === 'TAK');
+    nieJedzie.dispatchEvent(new Event('change'));
+
+    if (r.nieJada !== 'TAK') {
+      WEEKENDY.forEach(w => {
+        document.getElementById(w.id).checked = (r[w.label] === 'TAK');
+      });
+    }
+
+    document.getElementById('submit-btn').textContent = 'Zaktualizuj odpowiedź';
+  }
+
+  // ---- Wyślij formularz ----
+  function submitForm() {
+    const para = paraSelect.value;
+    if (!para) return;
+
+    if (SCRIPT_URL === 'WSTAW_TUTAJ_URL_APPS_SCRIPT') {
+      showMsg('⚠️ Najpierw skonfiguruj Apps Script i wklej URL do pliku HTML!', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Zapisywanie…';
+
+    const params = new URLSearchParams({
+      action: 'save',
+      para,
+      nieJada: document.getElementById('nie-jedzie').checked ? '1' : '0',
+    });
+
+    WEEKENDY.forEach(w => {
+      params.append(w.id, document.getElementById(w.id).checked ? '1' : '0');
+    });
+
+    fetch(SCRIPT_URL + '?' + params.toString())
+      .then(r => r.json())
+      .then(() => {
+        showMsg('✅ Zapisano! Dziękujemy za odpowiedź.', 'success');
+        btn.disabled = false;
+        btn.textContent = 'Zaktualizuj odpowiedź';
+        return loadData();
+      })
+      .catch(() => {
+        showMsg('❌ Ups, coś poszło nie tak. Spróbuj ponownie.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'Spróbuj ponownie';
+      });
+  }
+
+  function showMsg(text, type) {
+    const el = document.getElementById('msg');
+    el.textContent = text;
+    el.className = type;
+    el.style.display = 'block';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.display = 'none'; }, 7000);
+  }
+
+  // ---- Załaduj wyniki ----
+  function loadData() {
+    if (SCRIPT_URL === 'WSTAW_TUTAJ_URL_APPS_SCRIPT') {
+      document.getElementById('results').innerHTML = `
+        <div class="empty-state">
+          <span class="big">🔧</span>
+          <div>Brak połączenia z bazą danych.</div>
+          <div style="margin-top:0.3rem;font-size:0.8rem">Skonfiguruj Apps Script i wklej URL do pliku HTML.</div>
+        </div>`;
+      return Promise.resolve();
+    }
+
+    return fetch(SCRIPT_URL)
+      .then(r => r.json())
+      .then(data => {
+        allResponses = Array.isArray(data) ? data : [];
+        renderResults();
+        const para = paraSelect.value;
+        if (para) prefillForm(para);
+      })
+      .catch(() => {
+        document.getElementById('results').innerHTML = `
+          <div class="empty-state">
+            <span class="big">⚠️</span>
+            <div>Nie można załadować wyników.</div>
+            <div style="margin-top:0.3rem;font-size:0.8rem">Sprawdź połączenie i odśwież stronę.</div>
+          </div>`;
+      });
+  }
+
+  // ---- Renderuj wyniki ----
+  function renderResults() {
+    const container = document.getElementById('results');
+
+    const going       = allResponses.filter(r => r.nieJada !== 'TAK');
+    const notGoing    = allResponses.filter(r => r.nieJada === 'TAK');
+    const responded   = allResponses.map(r => r.para);
+    const notResponded = PARY.filter(p => !responded.includes(p));
+    const total = going.length;
+
+    if (allResponses.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <span class="big">👋</span>
+          <div>Jeszcze nikt nie odpowiedział.</div>
+          <div style="margin-top:0.3rem;font-size:0.8rem">Bądź pierwszy!</div>
+        </div>`;
+      return;
+    }
+
+    // Statystyki per weekend
+    const stats = WEEKENDY.map(w => {
+      const available   = going.filter(r => r[w.label] === 'TAK').map(r => r.para);
+      const unavailable = going.filter(r => r[w.label] !== 'TAK').map(r => r.para);
+      return { ...w, available, unavailable, count: available.length };
+    }).sort((a, b) => b.count - a.count);
+
+    let html = `<div class="summary-stat">
+      <strong>${allResponses.length} z ${PARY.length}</strong> par odpowiedziało`;
+    if (notGoing.length > 0)
+      html += ` &nbsp;·&nbsp; <span style="color:#e11d48">${notGoing.length} nie jedzie</span>`;
+    html += `</div>`;
+
+    stats.forEach((w, i) => {
+      const pct = total > 0 ? Math.round((w.count / total) * 100) : 0;
+      const colorClass = pct >= 70 ? 'pb-green' : pct >= 40 ? 'pb-amber' : 'pb-red';
+      const rankClass  = i === 0 ? 'rank-gold' : i === 1 ? 'rank-silver' : i === 2 ? 'rank-bronze' : 'rank-other';
+
+      html += `
+        <div class="wk-result">
+          <div class="wk-result-row" onclick="toggleDetail('d${w.id}', this)">
+            <span class="rank ${rankClass}">${i + 1}</span>
+            <span class="wk-name">${w.label}</span>
+            <span class="wk-count">${w.count}/${total} par</span>
+            <span class="wk-arrow" id="arr-${w.id}">▾</span>
+          </div>
+          <div class="progress-bar">
+            <div class="pb-fill ${colorClass}" style="width:0%" data-width="${pct}%"></div>
+          </div>
+          <div class="wk-detail" id="d${w.id}">
+            <div class="wk-detail-inner">
+              ${w.available.length ? `
+                <div class="section-micro green">✓ Mogą jechać</div>
+                <div class="chips">${w.available.map(p => `<span class="chip chip-yes">${p}</span>`).join('')}</div>
+              ` : ''}
+              ${w.unavailable.length ? `
+                <div class="section-micro red" style="margin-top:0.45rem">✗ Nie mogą</div>
+                <div class="chips">${w.unavailable.map(p => `<span class="chip chip-no">${p}</span>`).join('')}</div>
+              ` : ''}
+              ${notResponded.length ? `
+                <div class="section-micro" style="margin-top:0.45rem">? Brak odpowiedzi</div>
+                <div class="chips">${notResponded.map(p => `<span class="chip chip-pending">${p}</span>`).join('')}</div>
+              ` : ''}
+            </div>
+          </div>
+        </div>`;
+    });
+
+    if (notGoing.length > 0) {
+      html += `<div class="footer-section">
+        <div class="section-micro red">😢 Nie jadą w tym roku</div>
+        <div class="chips">${notGoing.map(r => `<span class="chip chip-no">${r.para}</span>`).join('')}</div>
+      </div>`;
+    }
+
+    if (notResponded.length > 0) {
+      html += `<div class="footer-section">
+        <div class="section-micro">⏳ Czekamy jeszcze na</div>
+        <div class="chips">${notResponded.map(p => `<span class="chip chip-pending">${p}</span>`).join('')}</div>
+      </div>`;
+    }
+
+    container.innerHTML = html;
+
+    // Animacja pasków po wyrenderowaniu
+    requestAnimationFrame(() => {
+      container.querySelectorAll('.pb-fill[data-width]').forEach(el => {
+        el.style.width = el.dataset.width;
+      });
+    });
+  }
+
+  function toggleDetail(id, row) {
+    const detail = document.getElementById(id);
+    const arrow  = document.getElementById('arr-' + id.slice(1));
+    detail.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('open');
+  }
+
+  // ---- Start ----
+  loadData();
+</script>
+</body>
+</html>
